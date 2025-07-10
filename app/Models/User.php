@@ -37,8 +37,29 @@ final class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        /* TODO: Please implement your own logic here. */
-        return true; // str_ends_with($this->email, '@larament.test');
+        if ($panel->getId() === 'admin') {
+            return $this->hasRole('Admin');
+        }
+
+        if ($panel->getId() === 'operator') {
+            return $this->hasRole('Operator');
+        }
+
+        if ($panel->getId() === 'partner') {
+            return $this->hasRole('Parceiro');
+        }
+
+        return false;
+    }
+
+    public function operator()
+    {
+        return $this->hasOne(Operator::class);
+    }
+
+    public function pointOfSale()
+    {
+        return $this->hasOne(PointOfSale::class, 'manager_id');
     }
 
     /**
