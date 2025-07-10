@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Operator\Resources;
 
-use App\Filament\Admin\Resources\DonationResource\Pages;
+use App\Filament\Operator\Resources\DonationResource\Pages;
+use App\Filament\Operator\Resources\DonationResource\RelationManagers;
 use App\Models\Donation;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Infolists\Infolist;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\Section;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\Section;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\TextColumn;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
@@ -28,6 +30,11 @@ class DonationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,42 +46,17 @@ class DonationResource extends Resource
                     ->decimals(2)
                     ->maxValue(10000)
                     ->placeholder('Digite o valor da doação'),
-                Forms\Components\Select::make('payment_method')
-                    ->label('Método de pagamento')
-                    ->default('pix')
-                    ->options([
-                        'credit_card' => 'Cartão de crédito',
-                        'debit_card' => 'Cartão de débito',
-                        'pix' => 'PIX',
-                        'cash' => 'Dinheiro',
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('point_of_sale_id')
-                    ->label('Ponto de Doação')
-                    ->relationship('pointOfSale', 'name')
-                    ->required()
-                    ->searchable()
-                    ->placeholder('Selecione um ponto de doação'),
                 Toggle::make('pay_now')
-                    ->label('Pagar agora')
+                    ->label('Receber Agora')
                     ->default(true)
                     ->helperText('Se desmarcado, a doação será registrada, mas não será processada imediatamente.'),
             ]);
-    }
-
-    public static function getGloballySearchableAttributes(): array
-    {
-        return ['uuid'];
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('uuid')
-                    ->label('ID')
-                    ->sortable()
-                    ->searchable(),
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge(),
@@ -90,9 +72,7 @@ class DonationResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 
@@ -109,17 +89,12 @@ class DonationResource extends Resource
                         TextEntry::make('customer.document')
                             ->label('CPF')
                             ->placeholder('Não informado'),
-                    ]),
+                    ])
+                    ->visible(fn (Model $record) => $record->customer !== null),
                 
                 Section::make('Dados da doação')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('point_of_sale.name')
-                            ->label('Ponto de Doação')
-                            ->placeholder('Não informado'),
-                        TextEntry::make('operator.name')
-                            ->label('Operador')
-                            ->placeholder('Não informado'),
                         TextEntry::make('uuid')
                             ->label('ID'),
                         TextEntry::make('status')
@@ -138,6 +113,7 @@ class DonationResource extends Resource
                             ->placeholder('Não informado')
                             ->dateTime(),
                     ]),
+                
             ]);
     }
 
@@ -154,7 +130,6 @@ class DonationResource extends Resource
             'index' => Pages\ListDonations::route('/'),
             'create' => Pages\CreateDonation::route('/create'),
             'view' => Pages\ViewDonation::route('/{record}'),
-            'edit' => Pages\EditDonation::route('/{record}/edit'),
         ];
     }
 }

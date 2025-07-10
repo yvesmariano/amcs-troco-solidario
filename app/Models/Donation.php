@@ -20,6 +20,9 @@ class Donation extends Model
         'payment_method',
         'received_at',
         'purchase_id',
+        'operator_commission',
+        'pos_commission',
+        'platform_fee',
     ];
 
     public $hidden = [
@@ -55,5 +58,10 @@ class Donation extends Model
     public function operator()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function receipts()
+    {
+        return $this->belongsToMany(Receipt::class);
     }
 }

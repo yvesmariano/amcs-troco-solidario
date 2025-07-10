@@ -42,7 +42,7 @@ final class User extends Authenticatable implements FilamentUser
         }
 
         if ($panel->getId() === 'operator') {
-            return $this->hasRole('Operator');
+            return $this->hasRole('Operador');
         }
 
         if ($panel->getId() === 'partner') {
