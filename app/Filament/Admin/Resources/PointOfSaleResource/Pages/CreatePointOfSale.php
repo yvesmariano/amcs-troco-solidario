@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\PointOfSaleResource\Pages;
+namespace App\Filament\Admin\Resources\PointOfSaleResource\Pages;
 
-use App\Filament\Resources\PointOfSaleResource;
+use App\Filament\Admin\Resources\PointOfSaleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

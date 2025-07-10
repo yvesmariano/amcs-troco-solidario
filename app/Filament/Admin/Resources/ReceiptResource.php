@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\ReceiptResource\Pages;
-use App\Filament\Resources\ReceiptResource\RelationManagers;
+use App\Filament\Admin\Resources\ReceiptResource\Pages;
+use App\Filament\Admin\Resources\ReceiptResource\RelationManagers;
 use App\Models\Receipt;
 use Filament\Forms;
 use Filament\Forms\Form;

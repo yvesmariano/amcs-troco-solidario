@@ -24,7 +24,7 @@ class PagarmeService
      * @param string $description
      * @return array
      */
-    public function generateQrCode(string $code, int $amount, int $expiresIn = 3600, string $description = 'Pagamento via Pix'): array
+    public function generateQrCode(string $code, int $amount, int $expiresIn = 3600, string $description = 'Pagamento de Doação'): array
     {
         $request = $this->client->post('/orders', [
             "items" => [[
@@ -44,14 +44,13 @@ class PagarmeService
                     'number' => '999777762',
                     'area_code' => '84',
                 ],
-            ],
+            ]],
             'payments' => [[
                 'payment_method' => 'pix',
                 'pix' => [
-                    'expires_in' => now()->addSeconds($expiresIn)->toIso8601String(),
+                    'expires_in' => $expiresIn,
                 ],
             ]],
-            ]
         ]);
 
         if ($request->failed()) {

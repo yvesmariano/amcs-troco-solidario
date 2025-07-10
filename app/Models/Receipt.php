@@ -12,11 +12,10 @@ class Receipt extends Model
     protected $fillable = [
         'point_of_sale_id',
         'operator_id',
-        'issued_at',
         'paid_at',
         'external_id',
         'qr_code_content',
-        'notes',
+        'description',
         'total',
     ];
 

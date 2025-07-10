@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ReceiptResource\Pages;
+namespace App\Filament\Admin\Resources\ReceiptResource\Pages;
 
-use App\Filament\Resources\ReceiptResource;
+use App\Filament\Admin\Resources\ReceiptResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 

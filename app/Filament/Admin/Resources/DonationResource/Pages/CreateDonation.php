@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\DonationResource\Pages;
+namespace App\Filament\Admin\Resources\DonationResource\Pages;
 
-use App\Filament\Resources\DonationResource;
+use App\Filament\Admin\Resources\DonationResource;
 use App\Models\Receipt;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;

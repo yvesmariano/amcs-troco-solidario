@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\PointOfSaleResource\Pages;
+namespace App\Filament\Admin\Resources\ReceiptResource\Pages;
 
-use App\Filament\Resources\PointOfSaleResource;
+use App\Filament\Admin\Resources\ReceiptResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditPointOfSale extends EditRecord
+class EditReceipt extends EditRecord
 {
-    protected static string $resource = PointOfSaleResource::class;
+    protected static string $resource = ReceiptResource::class;
 
     protected function getHeaderActions(): array
     {

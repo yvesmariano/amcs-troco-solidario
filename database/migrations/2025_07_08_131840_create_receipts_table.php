@@ -15,12 +15,12 @@ return new class() extends Migration
             $table->uuid('uuid')->unique();
             $table->decimal('total', 10, 2);
             $table->enum('status', ['pending', 'approved', 'canceled'])->default('pending');
+            $table->text('description')->nullable();
             $table->foreignId('point_of_sale_id')->constrained();
             $table->foreignId('operator_id')->nullable()->constrained('users');
             $table->timestamp('paid_at')->nullable();
             $table->string('external_id', 100)->nullable();
             $table->text('qr_code_content')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

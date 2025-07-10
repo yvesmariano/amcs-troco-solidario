@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\DonationResource\Pages;
-use App\Filament\Resources\DonationResource\RelationManagers;
+use App\Filament\Admin\Resources\DonationResource\Pages;
+use App\Filament\Admin\Resources\DonationResource\RelationManagers;
 use App\Models\Donation;
 use Dom\Text;
 use Filament\Forms;

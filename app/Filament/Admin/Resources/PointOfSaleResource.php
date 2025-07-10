@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\PointOfSaleResource\Pages;
-use App\Filament\Resources\PointOfSaleResource\RelationManagers;
+use App\Filament\Admin\Resources\PointOfSaleResource\Pages;
+use App\Filament\Admin\Resources\PointOfSaleResource\RelationManagers;
 use App\Models\PointOfSale;
 use Filament\Forms;
 use Filament\Forms\Form;
