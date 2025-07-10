@@ -25,11 +25,15 @@ class PartnerPanelProvider extends PanelProvider
     {
         return $panel
             ->id('partner')
-            ->path('partner')
+            ->path('parceiro')
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->spa()
+            ->darkMode(false)
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/Partner/Resources'), for: 'App\\Filament\\Partner\\Resources')
             ->discoverPages(in: app_path('Filament/Partner/Pages'), for: 'App\\Filament\\Partner\\Pages')
             ->pages([

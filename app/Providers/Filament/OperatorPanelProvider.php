@@ -25,11 +25,16 @@ class OperatorPanelProvider extends PanelProvider
     {
         return $panel
             ->id('operator')
-            ->path('operacao')
+            ->path('/')
+            ->default()
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Orange,
             ])
+            ->spa()
+            ->darkMode(false)
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/Operator/Resources'), for: 'App\\Filament\\Operator\\Resources')
             ->discoverPages(in: app_path('Filament/Operator/Pages'), for: 'App\\Filament\\Operator\\Pages')
             ->pages([

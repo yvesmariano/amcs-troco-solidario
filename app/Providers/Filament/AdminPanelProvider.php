@@ -26,19 +26,18 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
             ->passwordReset()
             ->sidebarCollapsibleOnDesktop()
-//            ->sidebarFullyCollapsibleOnDesktop()
             ->spa()
             ->profile(Profile::class, false)
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
                 'primary' => Color::Orange,
             ])
+            ->darkMode(false)
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])

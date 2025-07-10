@@ -42,7 +42,7 @@ class DonationResource extends Resource
                     ->required()
                     ->minValue(1)
                     ->decimals(2)
-                    ->maxValue(1000)
+                    ->maxValue(10000)
                     ->placeholder('Digite o valor da doação'),
                 Forms\Components\Select::make('payment_method')
                     ->label('Método de pagamento')

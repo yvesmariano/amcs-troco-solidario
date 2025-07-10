@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'pagarme' => [
+        'api_key' => env('PAGARME_API_KEY'),
+        'base_url' => env('PAGARME_BASE_URL', 'https://api.pagar.me/core/v5'),
+    ],
 ];

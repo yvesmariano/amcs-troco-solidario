@@ -83,12 +83,35 @@ class UserResource extends Resource
                             ->required()
                             ->visible(fn (Get $get): bool => filled($get('password')))
                             ->dehydrated(false),
-                        Select::make('roles')->multiple()->relationship('roles', 'name')
+                        Select::make('roles')
+                            ->multiple()
+                            ->relationship('roles', 'name')
                             ->label('Funções')
                             ->preload()
-                            ->searchable()
-                            ->required(),
+                            ->required()
+                            ->live(),
                     ]),
+                    Forms\Components\Section::make('Dados do Operador')
+                        ->relationship('operator')
+                        ->columns(2)
+                        ->schema([
+                            Select::make('point_of_sale_id')
+                                ->label('Ponto de Venda')
+                                ->relationship('pointOfSale', 'name')
+                                ->required(),
+                            TextInput::make('commission_percentage')
+                                ->label('Percentual de Comissão (%)')
+                                ->numeric()
+                                ->default(0)
+                                ->minValue(0)
+                                ->maxValue(100),
+                            TextInput::make('commission_amount')
+                                ->label('Valor da Comissão (R$)')
+                                ->numeric()
+                                ->default(0)
+                                ->minValue(0),
+                        ])
+                        ->visible(fn (Get $get) => in_array('3', (array) $get('roles'))),
             ]);
     }
 
