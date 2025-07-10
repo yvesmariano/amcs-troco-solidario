@@ -51,12 +51,17 @@ class UserResource extends Resource
                             ->label(__('filament-panels::pages/auth/edit-profile.form.name.label'))
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('username')
+                            ->label('Usuário')
+                            ->required()
+                            ->maxLength(50)
+                            ->unique(ignoreRecord: true)
+                            ->autocomplete('username'),
                         Forms\Components\TextInput::make('email')
                             ->label(__('filament-panels::pages/auth/edit-profile.form.email.label'))
                             ->email()
                             ->unique(ignoreRecord: true)
-                            ->required()
-                            ->maxLength(255),
+                            ->maxLength(100),
                         TextInput::make('password')
                             ->label(__('filament-panels::pages/auth/edit-profile.form.password.label'))
                             ->password()
@@ -95,10 +100,16 @@ class UserResource extends Resource
                     ->label('Nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                   ->label('E-mail')
+                Tables\Columns\TextColumn::make('username')
+                    ->label('Usuário')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->label('Funções')
+                    ->badge()
+                    ->separator(', ')
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at', 'Criado em')
                     ->dateTime()
                     ->sortable()

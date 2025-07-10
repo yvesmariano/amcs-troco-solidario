@@ -12,9 +12,10 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->create([
+                'username' => config('app.default_user.username'),
                 'email' => config('app.default_user.email'),
                 'password' => Hash::make(config('app.default_user.password')),
                 'name' => config('app.default_user.name'),
-            ]);
+            ])->assignRole('Admin');
     }
 }
